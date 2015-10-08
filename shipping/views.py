@@ -21,6 +21,6 @@ class ShopifyGetToken(Shopify):
         params = {key: request.GET.get(key) for key in\
                     ['code', 'shop', 'signature', 'timestamp', 'hmac']}
         self.shopify_agent._set_token(params)
-        customers_list = self.shopify_agent.fetch_customers()
+        orders_list = self.shopify_agent.fetch_orders()
         return render(request, 'shopify_callback.html',
-                      {'customers': customers_list})
+                      {'orders': orders_list})

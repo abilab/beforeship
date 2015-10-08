@@ -23,10 +23,10 @@ class ShopifyAgent():
         self.session = shopify.Session(self.shop_name + '.myshopify.com',
                                        self.token)
 
-    def fetch_customers(self):
+    def fetch_orders(self):
         shopify.ShopifyResource.activate_session(self.session)
-        customers_attrs = []
-        customers_list = shopify.Customer.search()
-        for customer in customers_list:
-            customers_attrs.append(customer.attributes)
-        return customers_attrs
+        orders_list = []
+        orders_list_fetched = shopify.Order.find()
+        for order in orders_list_fetched:
+            orders_list.append(order.to_dict())
+        return orders_list
