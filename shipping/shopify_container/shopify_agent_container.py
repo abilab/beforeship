@@ -25,8 +25,41 @@ class ShopifyAgent():
 
     def fetch_orders(self):
         shopify.ShopifyResource.activate_session(self.session)
-        orders_list = []
-        orders_list_fetched = shopify.Order.find()
-        for order in orders_list_fetched:
-            orders_list.append(order.to_dict())
-        return orders_list
+        self.input_orders_list = []
+        self.orders_list_fetched = shopify.Order.find()
+        for order in self.orders_list_fetched:
+            self.input_orders_list.append(order.to_dict())
+        self.transform_orders()
+
+    def transform_orders(self):
+        self.transformed_orders_list = []
+        for order in self.input_orders_list:
+            customer_order = {}
+            customer_order['order_id'] = order['id']
+            customer_order['backer_id'] = order['customer']['id']
+            customer_order['first_name'] = order['customer']['first_name']
+            customer_order['last_name'] = order['customer']['last_name']
+            customer_order['email'] = order['customer']['email']
+            customer_order['order_date'] = order['created_at']
+            customer_order['reward'] = [{' '.join([item['name'], 'SKU:', item['sku']]): item['quantity']} for item in order['line_items']]
+            customer_order['billing_address'] = {'first_name': order['billing_address']['first_name'],
+                                                 'last_name': order['billing_address']['last_name'],
+                                                 'company': order['billing_address']['company'],
+                                                 'address1': order['billing_address']['address1'],
+                                                 'address2': order['billing_address']['address2'],
+                                                 'city': order['billing_address']['city'],
+                                                 'country': order['billing_address']['country'],
+                                                 'state': order['billing_address']['province'],
+                                                 'postal_code': order['billing_address']['zip'],
+                                                 'telephone': order['billing_address']['phone']}
+            customer_order['shipping_address'] = {'first_name': order['billing_address']['first_name'],
+                                                  'last_name': order['billing_address']['last_name'],
+                                                  'company': order['billing_address']['company'],
+                                                  'address1': order['billing_address']['address1'],
+                                                  'address2': order['billing_address']['address2'],
+                                                  'city': order['billing_address']['city'],
+                                                  'country': order['billing_address']['country'],
+                                                  'state': order['billing_address']['province'],
+                                                  'postal_code': order['billing_address']['zip'],
+                                                  'telephone': order['billing_address']['phone']}
+            self.transformed_orders_list.append(customer_order)
