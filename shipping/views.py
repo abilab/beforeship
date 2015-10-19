@@ -24,8 +24,6 @@ class ShopifyGetToken(Shopify):
                   ['code', 'shop', 'signature', 'timestamp', 'hmac']}
         self.shopify_agent._set_token(params)
         self.shopify_agent.fetch_orders()
-        import json as j
-        print((j.dumps(self.shopify_agent.transformed_orders_list, indent=4)))
         for o in self.shopify_agent.transformed_orders_list:
             order = Order(
                 order_id=o["order_id"],
