@@ -6,6 +6,6 @@ from django.utils.decorators import method_decorator
 class UserView(TemplateView):
     template_name = 'user_data/user_home.html'
 
-    @method_decorator(login_required)
+    @method_decorator(login_required(login_url='login'))
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
