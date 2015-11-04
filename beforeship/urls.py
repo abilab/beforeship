@@ -15,11 +15,28 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from shipping import views
-from shipping.views import ShopifyGetCode, ShopifyGetToken
+from shipping.views.shopify import ShopifyGetCode, ShopifyGetToken
+from shipping.views.registration import LoginView, AddUserView
+from shipping.views.user_data import UserView
+from shipping.views.basic import HomeView, ShopSourcesView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', ShopifyGetCode.as_view(), name='home'),
-    url(r'^shopify/callback', ShopifyGetToken.as_view(), name='shopify_callback')
+
+    # Home view
+    url(r'^$', HomeView.as_view(), name='home'),
+
+    #basic views
+    url(r'^shop/sources', ShopSourcesView.as_view(), name='shop_sources'),
+
+    # Shopify views
+    url(r'^shopify/connect', ShopifyGetCode.as_view(), name='shopify_connect'),
+    url(r'^shopify/callback', ShopifyGetToken.as_view(), name='shopify_callback'),
+
+    # User registration views
+    url(r'^login/', LoginView.as_view(), name='login'),
+    url(r'^registration/', AddUserView.as_view(), name='add_user'),
+
+    # User data views
+    url(r'^user/home/', UserView.as_view(), name='user_home')
 ]

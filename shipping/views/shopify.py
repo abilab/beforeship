@@ -12,7 +12,7 @@ class ShopifyGetCode(Shopify):
     def get(self, request):
         self.__class__.__bases__[0]._set_shopify_agent('teststore-1109')
         self.shopify_agent._set_permission_url()
-        return render(request, 'home.html',
+        return render(request, 'shopify/shopify_connect.html',
                       {'shopify_agent': self.shopify_agent})
 
 
@@ -22,5 +22,5 @@ class ShopifyGetToken(Shopify):
                     ['code', 'shop', 'signature', 'timestamp', 'hmac']}
         self.shopify_agent._set_token(params)
         self.shopify_agent.fetch_orders()
-        return render(request, 'shopify_callback.html',
+        return render(request, 'shopify/shopify_callback.html',
                       {'orders': self.shopify_agent.transformed_orders_list})

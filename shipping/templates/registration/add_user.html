@@ -2,14 +2,22 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>BeforeShop Home</title>
+  <title>Registration</title>
   <!-- Include styles -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
 </head>
 <body>
-  <h1>Main Page</h1>
-  <a class="btn btn-default" href="{{ shopify_agent.permission_url }}" role="button">Link</a>
+  <h1>Registration</h1>
+  <form action="{% url "add_user" %}" method="post"
+	enctype="multipart/form-data" role="form">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Sign Up" name="add_button"
+           class="btn btn-primary" />
+    <button type="submit" name="cancel_button"
+            class="btn btn-link">Cancel</button>
+  </form>
 <!-- JavaScript section -->
 <script
         src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
