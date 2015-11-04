@@ -8,4 +8,5 @@ class UserView(TemplateView):
 
     @method_decorator(login_required(login_url='login'))
     def dispatch(self, *args, **kwargs):
+        # login required
         return super().dispatch(*args, **kwargs)
