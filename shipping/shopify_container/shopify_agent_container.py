@@ -2,6 +2,7 @@ import shopify
 from shipping.shopify_container.config import (API_KEY,
                                                SHARED_SECRET)
 
+
 class ShopifyAgent():
     def __init__(self, shop_name):
         self.shop_name = shop_name
@@ -41,6 +42,7 @@ class ShopifyAgent():
             customer_order['last_name'] = order['customer']['last_name']
             customer_order['email'] = order['customer']['email']
             customer_order['order_date'] = order['created_at']
+            customer_order['financial_status'] = order['financial_status']  # Nice to have to display on page?
             customer_order['reward'] = [{' '.join([item['name'], 'SKU:', item['sku']]): item['quantity']} for item in order['line_items']]
             customer_order['billing_address'] = {'first_name': order['billing_address']['first_name'],
                                                  'last_name': order['billing_address']['last_name'],
@@ -51,7 +53,7 @@ class ShopifyAgent():
                                                  'country': order['billing_address']['country'],
                                                  'state': order['billing_address']['province'],
                                                  'postal_code': order['billing_address']['zip'],
-                                                 'telephone': order['billing_address']['phone']}
+                                                 'telephone': order['billing_address']['phone']}  # Rename to phone?
             customer_order['shipping_address'] = {'first_name': order['billing_address']['first_name'],
                                                   'last_name': order['billing_address']['last_name'],
                                                   'company': order['billing_address']['company'],
