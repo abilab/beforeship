@@ -1,0 +1,27 @@
+/* Styles for base_logged template */
+#header {
+	background-color: #555;
+}
+
+#main_content {
+	
+}
+
+#footer {
+	background-color: #555;
+}
+
+#buttons_group {
+	float: right;
+	margin-top: 15px;
+}
+
+#copyright {
+	float: right;
+	color: white;
+}
+
+#logo {
+	color: white;
+	text-decoration: none;
+}

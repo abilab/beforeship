@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Shopify Connect</title>
-  <!-- Include styles -->
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
-</head>
-<body>
-  <h1>Shopify Connect</h1>
+{% extends "basic/base_logged.html" %}
+{% block meta_title %}Shopify Connect{% endblock meta_title %}
+{% block title %}Connect to Shopify Shop{% endblock title %}
+{% block content %}
   <a class="btn btn-default" href="{{ shopify_agent.permission_url }}" role="button">Link</a>
-<!-- JavaScript section -->
-<script
-        src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
-<script
-        src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% endblock content %}
