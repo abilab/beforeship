@@ -23,7 +23,6 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-*.pydevproject
 .pydevproject
 
 # PyInstaller
