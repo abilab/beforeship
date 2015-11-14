@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 PAYMENT_STATUS = (
@@ -10,7 +11,12 @@ PAYMENT_STATUS = (
 
 
 class Order(models.Model):
+    class Meta():
+        verbose_name = "order"
+        verbose_name_plural = "orders"
+
     order_id = models.IntegerField(primary_key=True)
+    shop_id = models.ForeignKey("Shops")
     backer_id = models.IntegerField()
     first_name = models.CharField(max_length=256, blank=False)
     last_name = models.CharField(max_length=256, blank=False)
@@ -48,3 +54,27 @@ class Order(models.Model):
     billing_state = models.CharField(max_length=256, blank=True)
     billing_postal_code = models.CharField(max_length=10, blank=False)
     billing_phone = models.CharField(max_length=20, blank=True)
+
+
+class ShopSources(models.Model):
+    class Meta():
+        verbose_name = "shop source"
+        verbose_name_plural = "shop sources"
+
+    source = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "%s" % self.source
+
+class Shops(models.Model):
+    class Meta():
+        verbose_name = "shop"
+        verbose_name_plural = "shops"
+
+    owner = models.ForeignKey(User)
+    shop_source = models.ForeignKey("ShopSources")
+    shop_name = models.CharField(max_length=30, blank=False, null=False)
+    token = models.CharField(max_length=256)
+
+    def __str__(self):
+        return "shop %s from %s" % (self.shop_name, self.shop_source)

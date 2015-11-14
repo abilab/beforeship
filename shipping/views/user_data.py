@@ -7,5 +7,5 @@ class UserView(TemplateView):
     template_name = 'user_data/user_home.html'
 
     @method_decorator(login_required(login_url='login'))
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)

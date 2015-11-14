@@ -3,6 +3,8 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from shipping.forms.registration import EnchancedUserCreationForm
@@ -50,6 +52,10 @@ class AddUserView(FormView):
 class UserProfile(DetailView):
     model = User
     template_name = 'registration/user_profile.html'
+
+    @method_decorator(login_required(login_url='login'))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
         return self.request.user
