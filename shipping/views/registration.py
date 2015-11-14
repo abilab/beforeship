@@ -1,5 +1,7 @@
 from django.views.generic.edit import FormView, View
+from django.views.generic.detail import DetailView
 from django.contrib.auth import logout, login
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -43,3 +45,11 @@ class AddUserView(FormView):
             return HttpResponseRedirect(reverse('home'))
         else:
             return super().post(request)
+
+
+class UserProfile(DetailView):
+    model = User
+    template_name = 'registration/user_profile.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user

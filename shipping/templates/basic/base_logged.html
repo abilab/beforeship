@@ -27,7 +27,7 @@
         <!-- Buttons Group -->
         <div class="col-xs-4">
           <div id="buttons_group">
-            <a class="btn btn-info" href=#>Profile <span class="badge">{{ request.user }}</span></a>
+            <a class="btn btn-info" href={% url "user_profile" %}>Profile <span class="badge">{{ request.user }}</span></a>
             <a class="btn btn-info" href={% url "logout" %}>Log Out</a>
           </div>
         </div>
@@ -36,8 +36,8 @@
       <!-- Start Page Main Content -->
       <div class="row" id="main_content">
         <h2>{% block title %}{% endblock title %}</h2>
-        {% block content %}{% endblock content %}
       </div>
+        {% block content %}{% endblock content %}
       <!-- End Page Main Content -->
       <!-- Start Footer -->
       <div class="row" id="footer">

@@ -1,0 +1,31 @@
+{% extends "basic/base_logged.html" %}
+{% block meta_title %}User Profile{% endblock meta_title %}
+{% block title %}User Profile{% endblock title %}
+{% block content %}
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table table-bordered table-striped">
+        <tr>
+          <td>Username</td>
+          <td>{{ object.username }}</td>
+        </tr>
+        <tr>
+          <td>First name</td>
+          <td>{{ object.first_name }}</td>
+        </tr>
+        <tr>
+          <td>Last name</td>
+          <td>{{ object.last_name }}</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>{{ object.email }}</td>
+        </tr>
+        <tr>
+          <td>Joining date</td>
+          <td>{{ object.date_joined }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+{% endblock content %}

@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from shipping.views.shopify import ShopifyGetCode, ShopifyGetToken
-from shipping.views.registration import LoginView, LogoutView, AddUserView
+from shipping.views.registration import LoginView, LogoutView, AddUserView, UserProfile
 from shipping.views.user_data import UserView
 from shipping.views.basic import HomeView, ShopSourcesView
 
@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^login/', LoginView.as_view(), name='login'),
     url(r'^logout/', LogoutView.as_view(), name='logout'),
     url(r'^registration/', AddUserView.as_view(), name='add_user'),
+    url(r'^user/profile/', UserProfile.as_view(), name='user_profile'),
 
     # User data views
     url(r'^user/home/', UserView.as_view(), name='user_home')
