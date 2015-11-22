@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from shipping.views.shopify import ShopifyGetCode, ShopifyGetToken
+from shipping.views.shopify import ShopifyInputView, TestShopify
 from shipping.views.registration import LoginView, LogoutView, AddUserView, UserProfile
 from shipping.views.user_data import UserView
 from shipping.views.basic import HomeView, ShopSourcesView
@@ -30,8 +30,10 @@ urlpatterns = [
     url(r'^shop/sources', ShopSourcesView.as_view(), name='shop_sources'),
 
     # Shopify views
-    url(r'^shopify/connect', ShopifyGetCode.as_view(), name='shopify_connect'),
-    url(r'^shopify/callback', ShopifyGetToken.as_view(), name='shopify_callback'),
+    url(r'^shopify/input', ShopifyInputView.as_view(), name='shopify_input'),
+#     url(r'^shopify/connect', ShopifyGetCode.as_view(), name='shopify_connect'),
+#     url(r'^shopify/callback', ShopifyGetToken.as_view(), name='shopify_callback'),
+    url(r'^shopify/test', TestShopify.as_view(), name='test_shopify'),
 
     # User registration views
     url(r'^login/', LoginView.as_view(), name='login'),

@@ -1,30 +1,33 @@
 import shopify
 from shipping.shopify_container.config import (API_KEY,
                                                SHARED_SECRET)
+from beforeship.settings import PORTAL_URL
 
 
 class ShopifyAgent():
     def __init__(self, shop_name):
         self.shop_name = shop_name
 
-    def _set_permission_url(self):
+    def setup_session(self):
         shopify.Session.setup(api_key=API_KEY, secret=SHARED_SECRET)
         self.session = shopify.Session(self.shop_name + '.myshopify.com')
+
+    def setup_permission_url(self):
         self.scope = ['read_content', 'write_content',
                       'read_products', 'write_products',
                       'read_customers', 'write_customers',
                       'read_orders', 'write_orders',
                       'read_shipping', 'write_shipping']
+        self.redirect_uri = PORTAL_URL + r'/shopify/test'
         self.permission_url = self.session.\
-            create_permission_url(self.scope,
-                                  'http://127.0.0.1:8000/shopify/callback')
+            create_permission_url(self.scope, redirect_uri=self.redirect_uri)
 
-    def _set_token(self, params):
+    def set_token(self, params):
         self.token = self.session.request_token(params)
-        self.session = shopify.Session(self.shop_name + '.myshopify.com',
-                                       self.token)
 
     def fetch_orders(self):
+        self.session = shopify.Session(self.shop_name + '.myshopify.com',
+                                       token=self.token)
         shopify.ShopifyResource.activate_session(self.session)
         self.input_orders_list = []
         self.orders_list_fetched = shopify.Order.find()

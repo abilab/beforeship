@@ -1,0 +1,14 @@
+{% for field in form %}
+  <div class="form-group">
+    {{ field.errors }}
+    <label for={{ field.id_for_label }} class="col-sm-4 control-label">
+      {{ field.label }}
+    </label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id={{ field.id_for_label }}>
+    </div>
+    {% if field.help_text %}
+      <p>{{ field.help_text|safe }}</p>
+    {% endif %}
+  </div>
+{% endfor %}
