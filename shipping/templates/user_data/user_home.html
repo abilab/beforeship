@@ -2,7 +2,44 @@
 {% block meta_title %}Shops{% endblock meta_title %}
 {% block title %}Shops{% endblock title %}
 {% block content %}
-  <div>
-    <a href={% url 'shop_sources' %}>Add Shop</a>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-info" role="alert">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+  {% if not object_list %}
+    <div class="alert alert-info" role="alert">No shops are connected to service</div>
+  {% endif %}
+  <div class="row">
+    <div class="col-xs-10">
+    </div>
+    <div class="col-xs-2">
+      <a class="btn btn-primary" href={% url 'shop_sources' %}>Add Shop</a>
+    </div>
   </div>
+  {% if object_list %}
+  <div class="row">
+    <div class="col-xs-12 table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Shop name</th>
+            <th>Shop Source</th>
+          </tr>
+        </thead>
+        <tbody>
+		  {% for shop in object_list %}
+		    <tr>
+		      <td>{{ forloop.counter }}</td>
+		      <td>{{ shop.shop_name }}</td>
+		      <td>{{ shop.shop_source }}</td>
+		      <td><a class="btn btn-primary" href=#>Fetch orders</a></td>
+		    </tr>
+		  {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
 {% endblock content %}

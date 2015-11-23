@@ -1,2 +1,10 @@
-Hello!
-{{ request.shop_name }}
+{% extends "basic/base_logged.html" %}
+{% block meta_title %}Shopify Input{% endblock meta_title %}
+{% block title %}Shopify Input{% endblock title %}
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-info" role="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+{% endblock content %}

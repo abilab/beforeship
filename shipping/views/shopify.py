@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.core.urlresolvers import reverse
 from django.views.generic.base import View, TemplateView
 from django.views.generic.edit import FormView
 from shipping.shopify_container.shopify_agent_container import ShopifyAgent
@@ -37,16 +39,26 @@ class ShopifyInputView(FormView, Shopify):
 class TestShopify(TemplateView, Shopify):
     template_name = 'shopify/test_shopify.html'
 
+    @method_decorator(login_required(login_url='login'))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
     def get(self, request):
         params = {key: request.GET.get(key) for key in\
                   ['code', 'shop', 'signature', 'timestamp', 'hmac']}
         self.shopify_agent.set_token(params)
-        new_shop = Shops(owner=self.request.user,
-                         shop_source=ShopSources.objects.get(source="Shopify"),
-                         shop_name=self.shopify_agent.shop_name,
-                         token=self.shopify_agent.token)
-        new_shop.save()
-        return super().get(request)
+        if not Shops.objects.get(owner=self.request.user,
+                                 shop_source=ShopSources.objects.get(source="Shopify"),
+                                 shop_name=self.shopify_agent.shop_name,
+                                 token=self.shopify_agent.token):
+            new_shop = Shops(owner=self.request.user,
+                             shop_source=ShopSources.objects.get(source="Shopify"),
+                             shop_name=self.shopify_agent.shop_name,
+                             token=self.shopify_agent.token)
+            new_shop.save()
+        else:
+            messages.info(request, "Shop is already connected to the service")
+        return HttpResponseRedirect(reverse('user_home'))
 
 
 # class ShopifyGetCode(Shopify):
