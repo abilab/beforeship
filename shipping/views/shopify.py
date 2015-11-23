@@ -47,15 +47,12 @@ class TestShopify(TemplateView, Shopify):
         params = {key: request.GET.get(key) for key in\
                   ['code', 'shop', 'signature', 'timestamp', 'hmac']}
         self.shopify_agent.set_token(params)
-        if not Shops.objects.get(owner=self.request.user,
-                                 shop_source=ShopSources.objects.get(source="Shopify"),
-                                 shop_name=self.shopify_agent.shop_name,
-                                 token=self.shopify_agent.token):
-            new_shop = Shops(owner=self.request.user,
-                             shop_source=ShopSources.objects.get(source="Shopify"),
-                             shop_name=self.shopify_agent.shop_name,
-                             token=self.shopify_agent.token)
-            new_shop.save()
+        _, created = Shops.objects.get_or_create(owner=self.request.user,
+                         shop_source=ShopSources.objects.get(source="Shopify"),
+                         shop_name=self.shopify_agent.shop_name,
+                         token=self.shopify_agent.token)
+        if created:
+            messages.info(request, "Your shop has connected to service successfully")
         else:
             messages.info(request, "Shop is already connected to the service")
         return HttpResponseRedirect(reverse('user_home'))
