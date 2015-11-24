@@ -1,11 +1,36 @@
 {% extends "basic/base_logged.html" %}
+{% load static from staticfiles %}
 {% block meta_title %}Shop Sources{% endblock meta_title %}
 {% block title %}Shop Sources{% endblock title %}
 {% block content %}
-  <div>
-    <a href={% url 'shopify_input' %}>Shopify</a>
-  </div>
-  <div>
-    <a href=#>CSV File</a>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="thumbnail">
+        <img src="{% static 'media/shopify_logo_black.png' %}" alt="Shopify Logo"
+             vspace="5" hspace="5"
+             style="max-height: 100px; width: auto;">
+        <div class="caption">
+          <h3>Shopify</h3>
+          <p>Connect to service your Shopify shop</p>
+          <p>
+            <a href={% url 'shopify_input' %} class="btn btn-primary" role="button">Connect Shop</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="thumbnail">
+        <img src="{% static 'media/csv-logo.png' %}" alt="CSV Logo"
+             vspace="5" hspace="5"
+             style="max-height: 100px; width: auto;">
+        <div class="caption">
+          <h3>CSV File</h3>
+          <p>Connect to service your shop with data from CSV file</p>
+          <p>
+            <a href=# class="btn btn-primary" role="button">Connect Shop</a>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock content %}
