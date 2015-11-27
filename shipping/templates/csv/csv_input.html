@@ -1,0 +1,26 @@
+{% extends "basic/base_logged.html" %}
+{% block meta_title %}CSV Input{% endblock meta_title %}
+{% block title %}CSV Input{% endblock title %}
+{% block content %}
+  <div class="row">
+    <div class="col-xs-12">
+      <form action="{% url "csv_input" %}" method="post"
+            enctype="multipart/form-data" role="form"
+            class="form-horizontal">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-group">
+          <label class="col-sm-1 control-label"></label>
+          <div class="col-sm-11">
+            <input type="submit" value="Add" name="add_button"
+                   class="btn btn-primary" />
+            <a class="btn btn-primary" name="cancel_button"
+               href={% url "user_home" %}>
+              Cancel
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}
