@@ -55,6 +55,10 @@ class Order(models.Model):
     billing_postal_code = models.CharField(max_length=10, blank=False)
     billing_phone = models.CharField(max_length=20, blank=True)
 
+    def __str__(self):
+        return "%s, customer: %s %s" % (self.shop_id, self.first_name,
+                                        self.last_name)
+
 
 class ShopSources(models.Model):
     class Meta():

@@ -7,8 +7,7 @@
       <form action="{% url "shopify_input" %}" method="post"
             enctype="multipart/form-data" role="form"
             class="form-horizontal">
-        {% csrf_token %}
-        {{ form.as_p }}
+        {% include "basic/base_form_fields_orginizer.html" %}
         <div class="form-group">
           <label class="col-sm-1 control-label"></label>
           <div class="col-sm-11">

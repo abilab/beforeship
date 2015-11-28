@@ -1,14 +1,24 @@
+{% csrf_token %}
 {% for field in form %}
-  <div class="form-group">
-    {{ field.errors }}
-    <label for={{ field.id_for_label }} class="col-sm-4 control-label">
-      {{ field.label }}
-    </label>
-    <div class="col-sm-4">
-      <input type="text" class="form-control" id={{ field.id_for_label }}>
+  {% if field.errors %}
+    <div class="form-group has-error">
+      <label class="col-xs-4 control-label">{{ field.label }}</label> 
+      <div class="col-xs-8">{{ field }}
+        <span class="help-block">
+          {% for error in  field.errors %}{{ error }}{% endfor %}
+        </span>
+      </div>
     </div>
-    {% if field.help_text %}
-      <p>{{ field.help_text|safe }}</p>
-    {% endif %}
-  </div>
+  {% else %}
+    <div class="form-group">
+      <label class="col-xs-4 control-label">{{ field.label }}</label> 
+      <div class="col-xs-8">{{ field }}
+        {% if field.help_text %}
+          <span class="help-block">
+            <small>{{ field.help_text }}</small>
+          </span>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
 {% endfor %}

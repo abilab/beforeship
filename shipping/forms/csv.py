@@ -9,4 +9,4 @@ class CSVInputForm(forms.Form):
     csv_file = forms.FileField(label="path to CSV file with shop orders data",
                                error_messages={"required":
                                                "please define correct path to"
-                                               "your CSV file"})
+                                               " your CSV file"})

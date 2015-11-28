@@ -107,3 +107,5 @@ STATIC_URL = '/static/'
 PORTAL_URL = r'http://127.0.0.1:8000'
 
 CSRF_FAILURE_VIEW = 'shipping.views.basic.csrf_failure'
+
+SERVER_TMP_FOLDER = '/tmp/'
