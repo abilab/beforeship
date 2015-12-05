@@ -1,24 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Home Page</title>
-  <!-- Include styles -->
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
-</head>
-<body>
-  <h1>Home Page</h1>
-  <div>
-    <a href={% url 'login' %}>Login into system</a>
+{% extends "basic/base_not_logged.html" %}
+{% block meta_title %}Main{% endblock meta_title %}
+{% block content %}
+  <div class="row">
+    <div class="col-xs-12" style="background-color: #b0c4de; height: 150px;">
+    </div>
   </div>
-  <div>
-    <a href={% url 'add_user' %}>Registration</a>
+  <div class="row" style="height: 20px;"></div>
+  <div class="row">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+      <a class="btn btn-primary btn-lg btn-block" href={% url 'login' %}>Login into system</a>
+    </div>
+    <div class="col-xs-4"></div>
   </div>
-<!-- JavaScript section -->
-<script
-        src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
-<script
-        src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-</body>
-</html>
+  <div class="row" style="height: 20px;"></div>
+  <div class="row">
+    <div class="col-xs-12" style="background-color: #d69ae5; height: 150px;">
+    </div>
+  </div>
+  <div class="row" style="height: 20px;"></div>
+  <div class="row">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+      <a class="btn btn-primary btn-lg btn-block" href={% url 'add_user' %}>Try Service!</a>
+    </div>
+    <div class="col-xs-4"></div>
+  </div>
+  <div class="row" style="height: 20px;"></div>
+  <div class="row">
+    <div class="col-xs-12" style="background-color: #c3ff66; height: 150px;">
+    
+    </div>
+  </div>
+{% endblock content %}

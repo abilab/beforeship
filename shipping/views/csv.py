@@ -7,7 +7,6 @@ from django.contrib import messages
 from shipping.forms.csv import CSVInputForm
 from shipping.csv_container.csv_agent_container import CSVFile
 from shipping.models import Shops, Order, ShopSources
-import csv
 
 
 class CSVInputView(FormView):
@@ -27,9 +26,9 @@ class CSVInputView(FormView):
                                         self.form.cleaned_data["shop_name"])
                 self.csv_file.process_csv_file()
                 self._save_orders()
-                messages.info(request, ("Your shop has connected to service "
-                                        "successfully, all orders have been "
-                                        "fetched from file"))
+                messages.info(request, ("Your shop has been connected to "
+                                        "service successfully, all orders "
+                                        "have been fetched from file"))
             else:
                 messages.info(request, ("Shop is already exist. Try another "
                                         "name for shop or delete existing"))
@@ -51,32 +50,32 @@ class CSVInputView(FormView):
     def _save_orders(self):
         for order in self.csv_file.file_content_list:
             (Order.objects.create
-                          (shop_id=self.shop,
-                           backer_id=order["backer_id"],
-                           first_name=order["first_name"],
-                           last_name=order["last_name"],
-                           email=order["email"],
-                           order_date=order["order_date"],
-                           reward=order["reward"],
-                           notes=order["notes"],
-                           financial_status=order["financial_status"],
-                           shipping_first_name=order["shipping_first_name"],
-                           shipping_last_name=order["shipping_last_name"],
-                           shipping_company=order["shipping_company"],
-                           shipping_address_1=order["shipping_address_1"],
-                           shipping_address_2=order["shipping_address_2"],
-                           shipping_city=order["shipping_city"],
-                           shipping_country=order["shipping_country"],
-                           shipping_state=order["shipping_state"],
-                           shipping_postal_code=order["shipping_postal_code"],
-                           shipping_phone=order["shipping_phone"],
-                           billing_first_name=order["billing_first_name"],
-                           billing_last_name=order["billing_last_name"],
-                           billing_company=order["billing_company"],
-                           billing_address_1=order["billing_address_1"],
-                           billing_address_2=order["billing_address_2"],
-                           billing_city=order["billing_city"],
-                           billing_country=order["billing_country"],
-                           billing_state=order["billing_state"],
-                           billing_postal_code=order["billing_postal_code"],
-                           billing_phone=order["billing_phone"]))
+                (shop_id=self.shop,
+                 backer_id=order.get("backer_id"),
+                 first_name=order.get("first_name"),
+                 last_name=order.get("last_name"),
+                 email=order.get("email"),
+                 order_date=order.get("order_date"),
+                 reward=order.get("reward"),
+                 notes=order.get("notes"),
+                 financial_status=order.get("financial_status"),
+                 shipping_first_name=order.get("shipping_first_name"),
+                 shipping_last_name=order.get("shipping_last_name"),
+                 shipping_company=order.get("shipping_company"),
+                 shipping_address_1=order.get("shipping_address_1"),
+                 shipping_address_2=order.get("shipping_address_2"),
+                 shipping_city=order.get("shipping_city"),
+                 shipping_country=order.get("shipping_country"),
+                 shipping_state=order.get("shipping_state"),
+                 shipping_postal_code=order.get("shipping_postal_code"),
+                 shipping_phone=order.get("shipping_phone"),
+                 billing_first_name=order.get("billing_first_name"),
+                 billing_last_name=order.get("billing_last_name"),
+                 billing_company=order.get("billing_company"),
+                 billing_address_1=order.get("billing_address_1"),
+                 billing_address_2=order.get("billing_address_2"),
+                 billing_city=order.get("billing_city"),
+                 billing_country=order.get("billing_country"),
+                 billing_state=order.get("billing_state"),
+                 billing_postal_code=order.get("billing_postal_code"),
+                 billing_phone=order.get("billing_phone")))

@@ -22,25 +22,20 @@
       <div class="row" id="header">
         <!-- Logo -->
         <div class="col-xs-8">
-          <a href={% url "user_home" %} id="logo"><h1>BeforeShip</h1></a>
+          <a href={% url "home" %} id="logo"><h1>BeforeShip</h1></a>
         </div>
-        <!-- Buttons Group -->
+        <!-- Start Buttons Group -->
         <div class="col-xs-4">
           <div id="buttons_group">
-            <a class="btn btn-info" href={% url "user_home" %}>Shops</a>
-            <a class="btn btn-info" href={% url "user_profile" %}>Profile <span class="badge">{{ request.user }}</span></a>
-            <a class="btn btn-info" href={% url "logout" %}>Log Out</a>
+            <a class="btn btn-info" href={% url "login" %}>Sign In</a>
+            <a class="btn btn-info" href={% url "add_user" %}>Register</a>
           </div>
         </div>
+        <!-- End Buttons Group -->
       </div>
       <!-- End Header -->
       <!-- Start Page Main Content -->
-      <div class="row" id="main_content">
-        <div class="col-xs-12">
-        <h2>{% block title %}{% endblock title %}</h2>
-        </div>
-      </div>
-        {% block content %}{% endblock content %}
+      {% block content %}{% endblock content %}
       <!-- End Page Main Content -->
       <!-- Start Footer -->
       <div class="row" id="footer">
