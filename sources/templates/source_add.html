@@ -1,0 +1,22 @@
+{% extends "basic/base_logged.html" %}
+{% load static from staticfiles %}
+{% block meta_title %}Add Source{% endblock meta_title %}
+{% block title %}Add Source{% endblock title %}
+{% block content %}
+  <div class="row">
+    <div class="col-xs-12">
+      <form action="{% url "source_add" %}" method="post"
+            enctype="multipart/form-data" role="form" class="form-horizontal">
+        {% include "basic/base_form_fields_orginizer.html" %}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">
+            Add
+          </button>
+          <a class="btn btn-primary" name="cancel_button" href={% url "source_list" %}>
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}

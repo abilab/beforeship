@@ -8,7 +8,8 @@ from django.views.generic.base import View, TemplateView
 from django.views.generic.edit import FormView
 from shipping.shopify_container.shopify_agent_container import ShopifyAgent
 from shipping.forms.shopify import ShopifyInputForm
-from shipping.models import Shops, ShopSources
+from shipping.models import Shops
+from sources.models.sources import Sources
 
 class Shopify():
     @classmethod
@@ -48,7 +49,7 @@ class TestShopify(TemplateView, Shopify):
                   ['code', 'shop', 'signature', 'timestamp', 'hmac']}
         self.shopify_agent.set_token(params)
         _, created = Shops.objects.get_or_create(owner=self.request.user,
-                         shop_source=ShopSources.objects.get(source="Shopify"),
+                         shop_source=Sources.objects.get(source="Shopify"),
                          shop_name=self.shopify_agent.shop_name,
                          token=self.shopify_agent.token)
         if created:

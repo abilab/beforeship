@@ -1,0 +1,32 @@
+{% extends "basic/base_logged.html" %}
+{% load static from staticfiles %}
+{% block meta_title %}Sources{% endblock meta_title %}
+{% block title %}List of Sources{% endblock title %}
+{% block content %}
+  <div class="row">
+    <div class="col-xs-12">
+       <table class="table table-bordered table-striped">
+         <thead>
+           <tr>
+             <th>#</th>
+             <th>name</th>
+             <th>description</th>
+             <th>logo</th>
+           </tr>
+         </thead>
+         <tbody>
+           {% for source_obj in object_list %}
+             <tr>
+               <td>{{ forloop.counter }}</td>
+               <td>{{ source_obj.source }}</td>
+               <td>{{ source_obj.description }}</td>
+               <td><img src="file:///home/andriy/Documents/beforeship/media/sources/shopify_logo_black.png" alt="CSV Logo"
+             vspace="5" hspace="5"
+             style="max-height: 100px; width: auto;">{{ source_obj.logo.path }}</td>
+             </tr>
+           {% endfor %}
+         </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock content %}

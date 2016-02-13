@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shipping'
+    'shipping',
+    'sources'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,6 +63,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
@@ -104,7 +106,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = '/home/andriy/Documents/beforeship/media/'
+
 PORTAL_URL = r'http://127.0.0.1:8000'
+
+MEDIA_URL = PORTAL_URL + MEDIA_ROOT
 
 CSRF_FAILURE_VIEW = 'shipping.views.basic.csrf_failure'
 

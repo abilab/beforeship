@@ -6,7 +6,8 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from shipping.forms.csv import CSVInputForm
 from shipping.csv_container.csv_agent_container import CSVFile
-from shipping.models import Shops, Order, ShopSources
+from shipping.models import Shops, Order
+from sources.models.sources import Sources
 
 
 class CSVInputView(FormView):
@@ -39,7 +40,7 @@ class CSVInputView(FormView):
         self.shop, created = (Shops.objects.get_or_create
                               (owner=self.request.user,
                                shop_source=\
-                                ShopSources.objects.get(source="CSV"),
+                                Sources.objects.get(source="CSV"),
                                shop_name=self.form.\
                                 cleaned_data["shop_name"],
                                token=""))

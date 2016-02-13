@@ -46,5 +46,8 @@ urlpatterns = [
     url(r'^user/profile/', UserProfile.as_view(), name='user_profile'),
 
     # User data views
-    url(r'^user/home/', UserView.as_view(), name='user_home')
+    url(r'^user/home/', UserView.as_view(), name='user_home'),
+
+    # Sources Views
+    url(r'^sources/', include("sources.urls"))
 ]

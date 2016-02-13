@@ -60,23 +60,13 @@ class Order(models.Model):
                                         self.last_name)
 
 
-class ShopSources(models.Model):
-    class Meta():
-        verbose_name = "shop source"
-        verbose_name_plural = "shop sources"
-
-    source = models.CharField(max_length=50)
-
-    def __str__(self):
-        return "%s" % self.source
-
 class Shops(models.Model):
     class Meta():
         verbose_name = "shop"
         verbose_name_plural = "shops"
 
     owner = models.ForeignKey(User)
-    shop_source = models.ForeignKey("ShopSources")
+    # shop_source = models.ForeignKey("ShopSources")
     shop_name = models.CharField(max_length=30, blank=False, null=False)
     token = models.CharField(max_length=256)
 
